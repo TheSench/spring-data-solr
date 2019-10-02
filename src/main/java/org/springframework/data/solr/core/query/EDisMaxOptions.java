@@ -2,6 +2,8 @@ package org.springframework.data.solr.core.query;
 
 /**
  * DisMax Options.
+ * Reference in Solr:
+ * https://github.com/apache/lucene-solr/blob/ec78ef785275e4d46c0f133c6b55be1f974b8db2/solr/core/src/java/org/apache/solr/search/ExtendedDismaxQParser.java
  *
  * @author Matthew Hall
  * @author Jon Senchyna
