@@ -4,6 +4,7 @@ package org.springframework.data.solr.core.query;
  * DisMax Options.
  *
  * @author Matthew Hall
+ * @author Jon Senchyna
  */
 public class DisMaxOptions {
 
@@ -15,7 +16,7 @@ public class DisMaxOptions {
   private Integer phraseSlop;
   private Integer querySlop;
   private Double tie;
-  private String phraseFunction;
+  private String phraseFields;
   private String defaultField;
 
 
@@ -51,8 +52,8 @@ public class DisMaxOptions {
     return tie;
   }
 
-  public String getPhraseFunction() {
-    return phraseFunction;
+  public String getPhraseFields() {
+    return phraseFields;
   }
 
   public String getDefaultField() {
@@ -71,7 +72,7 @@ public class DisMaxOptions {
     this.phraseSlop = phraseSlop;
     this.querySlop = querySlop;
     this.tie = tie;
-    this.phraseFunction = phraseFunction;
+    this.phraseFields = phraseFunction;
     this.defaultField = defaultField;
   }
 

@@ -1951,7 +1951,7 @@ public class DefaultQueryParserTests {
 		assertEquals(solrQuery.get(DisMaxParams.BF), options.getBoostFunction());
 		assertEquals(solrQuery.get(DisMaxParams.BQ), options.getBoostQuery());
 		assertEquals(solrQuery.get(DisMaxParams.MM), options.getMinimumMatch());
-		assertEquals(solrQuery.get(DisMaxParams.PF), options.getPhraseFunction());
+		assertEquals(solrQuery.get(DisMaxParams.PF), options.getPhraseFields());
 		assertEquals(solrQuery.get(DisMaxParams.PS), String.valueOf(options.getPhraseSlop()));
 		assertEquals(solrQuery.get(DisMaxParams.QF), options.getQueryFunction());
 		assertEquals(solrQuery.get(DisMaxParams.QS), String.valueOf(options.getQuerySlop()));

@@ -116,6 +116,10 @@ public class DefaultQueryParser extends QueryParserBase<SolrDataQuery> {
 			processDisMaxOptions(solrQuery, (DisMaxQuery) query);
 		}
 
+		if (query instanceof EDisMaxQuery) {
+			processEDisMaxOptions(solrQuery, (EDisMaxQuery) query);
+		}
+
 		return solrQuery;
 	}
 
@@ -157,12 +161,46 @@ public class DefaultQueryParser extends QueryParserBase<SolrDataQuery> {
 
 		setSolrParamIfPresent(solrQuery, BQ, disMaxOptions.getBoostQuery());
 		setSolrParamIfPresent(solrQuery, BF, disMaxOptions.getBoostFunction());
-		setSolrParamIfPresent(solrQuery, PF, disMaxOptions.getPhraseFunction());
+		setSolrParamIfPresent(solrQuery, PF, disMaxOptions.getPhraseFields());
 
 		setSolrParamIfPresent(solrQuery, PS, disMaxOptions.getPhraseSlop() == null ? null :
 				String.valueOf(disMaxOptions.getPhraseSlop()));
 		setSolrParamIfPresent(solrQuery, QS, disMaxOptions.getQuerySlop() == null ? null : String.valueOf(disMaxOptions.getQuerySlop()));
 		setSolrParamIfPresent(solrQuery, TIE, disMaxOptions.getTie() == null ? null : String.valueOf(disMaxOptions.getTie()));
+	}
+
+	private void processEDisMaxOptions(SolrQuery solrQuery, EDisMaxQuery eDisMaxQuery) {
+
+		if (eDisMaxQuery == null || eDisMaxQuery.getDisMaxOptions() == null) {
+			return;
+		}
+
+		EDisMaxOptions eDisMaxOptions = eDisMaxQuery.getEDisMaxOptions();
+
+		solrQuery.set("defType", "dismax");
+
+		setSolrParamIfPresent(solrQuery, QF, eDisMaxOptions.getDefaultField());
+
+		setSolrParamIfPresent(solrQuery, SPLIT_ON_WHITESPACE, eDisMaxOptions.getAltQuery());
+		setSolrParamIfPresent(solrQuery, BOOST, eDisMaxOptions.getBoost());
+		setSolrParamIfPresent(solrQuery, MM_AUTORELAX, eDisMaxOptions.shouldAutoRelaxMinimumShouldMatch());
+
+		setSolrParamIfPresent(solrQuery, LOWERCASE, eDisMaxOptions.getBoostQuery());
+
+		setSolrParamIfPresent(solrQuery, PS, eDisMaxOptions.getPhraseSlop() == null ? null :
+				String.valueOf(eDisMaxOptions.getPhraseSlop()));
+		setSolrParamIfPresent(solrQuery, PS2, eDisMaxOptions.getPhraseSlop2() == null ? null :
+				String.valueOf(eDisMaxOptions.getPhraseSlop2()));
+		setSolrParamIfPresent(solrQuery, PS3, eDisMaxOptions.getPhraseSlop3() == null ? null :
+				String.valueOf(eDisMaxOptions.getPhraseSlop3()));
+				
+		setSolrParamIfPresent(solrQuery, PF, eDisMaxOptions.getPhraseFields());
+		setSolrParamIfPresent(solrQuery, PF2, eDisMaxOptions.getPhraseFields2());
+		setSolrParamIfPresent(solrQuery, PF3, eDisMaxOptions.getPhraseFields3());
+
+		setSolrParamIfPresent(solrQuery, STOPWORDS, eDisMaxOptions.shouldRespectStopwords());
+
+		setSolrParamIfPresent(solrQuery, UF, eDisMaxOptions.getUserFields());
 	}
 
 	private static void setSolrParamIfPresent(SolrQuery solrQuery, String param, String value) {

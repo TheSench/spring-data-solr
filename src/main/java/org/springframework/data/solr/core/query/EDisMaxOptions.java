@@ -18,7 +18,7 @@ public class EDisMaxOptions extends DisMaxOptions {
   private Integer phraseSlop3;
   private String phraseFields2;
   private String phraseFields3;
-  private Boolean stopwords;
+  private Boolean respectStopwords;
   private String userFields;
   private String queryFields;
 
@@ -154,8 +154,8 @@ public class EDisMaxOptions extends DisMaxOptions {
     return this.phraseFields3;
   }
 
-  public Boolean isStopwords() {
-    return this.stopwords;
+  public Boolean shouldRespectStopwords() {
+    return this.respectStopwords;
   }
 
   public String getUserFields() {
@@ -184,7 +184,7 @@ public class EDisMaxOptions extends DisMaxOptions {
     private Integer phraseSlop3;
     private String phraseFields2;
     private String phraseFields3;
-    private Boolean stopwords;
+    private Boolean respectStopwords;
     private String userFields;
     private String queryFields;
 
@@ -234,8 +234,8 @@ public class EDisMaxOptions extends DisMaxOptions {
       return this;
     }
 
-    public Builder stopwords(Boolean stopwords) {
-      this.stopwords = stopwords;
+    public Builder respectStopwords(Boolean respectStopwords) {
+      this.respectStopwords = respectStopwords;
       return this;
     }
 
@@ -258,12 +258,11 @@ public class EDisMaxOptions extends DisMaxOptions {
         options.autoRelaxMinimumShouldMatch = this.autoRelaxMinimumShouldMatch;
         options.boost = this.boost;
         options.allowLowercaseOperators = this.allowLowercaseOperators;
-        options.phraseSlop = this.phraseSlop;
         options.phraseSlop2 = this.phraseSlop2;
         options.phraseSlop3 = this.phraseSlop3;
         options.phraseFields2 = this.phraseFields2;
         options.phraseFields3 = this.phraseFields3;
-        options.stopwords = this.stopwords;
+        options.respectStopwords = this.respectStopwords;
         options.userFields = this.userFields;
         options.queryFields = this.queryFields;
 
