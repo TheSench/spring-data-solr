@@ -14,14 +14,13 @@ public class EDisMaxOptions extends DisMaxOptions {
   private Boolean autoRelaxMinimumShouldMatch;
   private String boost;
   private Boolean allowLowercaseOperators;
-  private Integer phraseSlop;
   private Integer phraseSlop2;
   private Integer phraseSlop3;
   private String phraseFields2;
   private String phraseFields3;
   private Boolean stopwords;
-  private String uf;
-  private String qf;
+  private String userFields;
+  private String queryFields;
 
 
 
@@ -95,7 +94,8 @@ public class EDisMaxOptions extends DisMaxOptions {
    */
   @Override
   public Integer getPhraseSlop() {
-    return this.phraseSlop;
+    // Overriding to provide eDisMax Javadoc
+    return super.getPhraseSlop();
   }
 
   /**
@@ -158,32 +158,116 @@ public class EDisMaxOptions extends DisMaxOptions {
     return this.stopwords;
   }
 
-  public String getUf() {
-    return this.uf;
+  public String getUserFields() {
+    return this.userFields;
   }
 
-  public String getQf() {
-    return this.qf;
+  public String getQueryFields() {
+    return this.queryFields;
   }
 
-  private EDisMaxOptions(String sow) {
-    this.splitOnWhitespace = sow;
+  private EDisMaxOptions(String altQuery, String queryFunction, String minimumMatch, String boostQuery,
+  String boostFunction, Integer phraseSlop, Integer querySlop, Double tie, String phraseFunction,
+  String defaultField) {
+    super(altQuery, queryFunction, minimumMatch, boostQuery, boostFunction,
+      phraseSlop, querySlop, tie, phraseFunction, defaultField);
   }
 
 
-  public static class Builder {
+  public static class Builder extends DisMaxOptions.Builder {
 
-    private String sow;
+    private Boolean splitOnWhitespace;
+    private Boolean autoRelaxMinimumShouldMatch;
+    private String boost;
+    private Boolean allowLowercaseOperators;
+    private Integer phraseSlop2;
+    private Integer phraseSlop3;
+    private String phraseFields2;
+    private String phraseFields3;
+    private Boolean stopwords;
+    private String userFields;
+    private String queryFields;
 
     public Builder() {}
 
-    public Builder sow(String sow) {
-      this.sow = sow;
+    public Builder splitOnWhitespace(Boolean splitOnWhitespace) {
+      this.splitOnWhitespace = splitOnWhitespace;
       return this;
     }
 
+    public Builder autoRelaxMinimumShouldMatch(Boolean autoRelaxMinimumShouldMatch) {
+      this.autoRelaxMinimumShouldMatch = autoRelaxMinimumShouldMatch;
+      return this;
+    }
+
+    public Builder boost(String boost) {
+      this.boost = boost;
+      return this;
+    }
+
+    public Builder allowLowercaseOperators(Boolean allowLowercaseOperators) {
+      this.allowLowercaseOperators = allowLowercaseOperators;
+      return this;
+    }
+
+    public Builder phraseSlop(Integer phraseSlop) {
+      return (Builder) super.phraseSlop(phraseSlop);
+    }
+
+    public Builder phraseSlop2(Integer phraseSlop2) {
+      this.phraseSlop2 = phraseSlop2;
+      return this;
+    }
+
+    public Builder phraseSlop3(Integer phraseSlop3) {
+      this.phraseSlop3 = phraseSlop3;
+      return this;
+    }
+
+    public Builder phraseFields2(String phraseFields2) {
+      this.phraseFields2 = phraseFields2;
+      return this;
+    }
+
+    public Builder phraseFields3(String phraseFields3) {
+      this.phraseFields3 = phraseFields3;
+      return this;
+    }
+
+    public Builder stopwords(Boolean stopwords) {
+      this.stopwords = stopwords;
+      return this;
+    }
+
+    public Builder userFields(String userFields) {
+      this.userFields = userFields;
+      return this;
+    }
+
+    public Builder queryFields(String queryFields) {
+      this.queryFields = queryFields;
+      return this;
+    }
+
+
     public EDisMaxOptions build() {
-      return new EDisMaxOptions(sow);
+      EDisMaxOptions options = new EDisMaxOptions(altQuery, queryFunction, minimumMatch, boostQuery, boostFunction,
+        phraseSlop, querySlop, tie, phraseFunction, defaultField);
+
+        options.splitOnWhitespace = this.splitOnWhitespace;
+        options.autoRelaxMinimumShouldMatch = this.autoRelaxMinimumShouldMatch;
+        options.boost = this.boost;
+        options.allowLowercaseOperators = this.allowLowercaseOperators;
+        options.phraseSlop = this.phraseSlop;
+        options.phraseSlop2 = this.phraseSlop2;
+        options.phraseSlop3 = this.phraseSlop3;
+        options.phraseFields2 = this.phraseFields2;
+        options.phraseFields3 = this.phraseFields3;
+        options.stopwords = this.stopwords;
+        options.userFields = this.userFields;
+        options.queryFields = this.queryFields;
+
+        return options;
     }
   }
 }

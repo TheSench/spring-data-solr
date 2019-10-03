@@ -59,7 +59,7 @@ public class DisMaxOptions {
     return defaultField;
   }
 
-  private DisMaxOptions(String altQuery, String queryFunction, String minimumMatch, String boostQuery,
+  protected DisMaxOptions(String altQuery, String queryFunction, String minimumMatch, String boostQuery,
       String boostFunction, Integer phraseSlop, Integer querySlop, Double tie, String phraseFunction,
       String defaultField) {
 
@@ -78,17 +78,16 @@ public class DisMaxOptions {
 
   public static class Builder {
 
-    private String altQuery;
-    private String queryFunction;
-    private String minimumMatch;
-    private String boostQuery;
-    private String boostFunction;
-    private Integer phraseSlop;
-    private Integer querySlop;
-    private Double tie;
-    private String phraseFunction;
-
-    private String defaultField;
+    protected String altQuery;
+    protected String queryFunction;
+    protected String minimumMatch;
+    protected String boostQuery;
+    protected String boostFunction;
+    protected Integer phraseSlop;
+    protected Integer querySlop;
+    protected Double tie;
+    protected String phraseFunction;
+    protected String defaultField;
 
     public Builder() {}
 
